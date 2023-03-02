@@ -16,3 +16,8 @@ Insert into employee_payroll Values('Snehal',1000000.00,'2021-01-01'),('Mayur',1
 Select * From employee_payroll
 Select * From employee_payroll where Id =1;
 Select Name From employee_payroll where Id =1;
+
+--Uc5 retrieve salary data for a particular employee
+Select salary from employee_payroll where Name ='Snehal';
+--employees who have joined in a particular data range
+Select * from employee_payroll where start between cast('2019-01-01' as date) AND GETDATE();
