@@ -27,3 +27,23 @@ Alter Table employee_payroll add Gender char
 --Update Gender Data
 Update employee_payroll set Gender = 'F' Where Name = 'Snehal';
 Update employee_payroll set Gender ='M' Where Name = 'Mayur' or Name = 'Vaibhav';
+
+--Uc7 SUM, AVG, MIN, MAX, COUNT
+--SUM
+select sum(Salary) from employee_payroll where Gender ='M' group by Gender
+select sum(Salary) from employee_payroll where Gender ='F' group by Gender
+--AVG
+select avg(Salary) from employee_payroll where Gender ='M' group by Gender
+select avg(Salary) from employee_payroll where Gender ='F' group by Gender
+--MIN
+select min(Salary) from employee_payroll where Gender ='M' group by Gender
+select min(Salary) from employee_payroll where Gender ='F' group by Gender
+
+--MAX
+select max(Salary) from employee_payroll where Gender ='M' group by Gender
+select max(Salary) from employee_payroll where Gender ='F' group by Gender
+
+--COUNT
+select count(Name) from employee_payroll where Gender ='M' group by Gender
+select count(Name) from employee_payroll where Gender ='F' group by Gender
+
