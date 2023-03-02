@@ -21,3 +21,9 @@ Select Name From employee_payroll where Id =1;
 Select salary from employee_payroll where Name ='Snehal';
 --employees who have joined in a particular data range
 Select * from employee_payroll where start between cast('2019-01-01' as date) AND GETDATE();
+
+--Uc6 add Gender to Employee Payroll Table
+Alter Table employee_payroll add Gender char
+--Update Gender Data
+Update employee_payroll set Gender = 'F' Where Name = 'Snehal';
+Update employee_payroll set Gender ='M' Where Name = 'Mayur' or Name = 'Vaibhav';
