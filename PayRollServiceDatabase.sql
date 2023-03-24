@@ -10,7 +10,7 @@ start date not null
 )
 
 --Uc3 Insert Data
-Insert into employee_payroll Values('Snehal',1000000.00,'2021-01-01'),('Mayur',1500000.00,'2020-04-01'),('Vaibhav',2000000.00,'2018-05-06');
+Insert into employee_payroll Values('Snehu',1000000.00,'2021-05-20','F'),('Lata',150000.00,'2021-04-01','M'),('Raju',2000000.00,'2018-05-06','M');
 
 --Uc4 Display
 Select * From employee_payroll
@@ -47,3 +47,22 @@ select max(Salary) from employee_payroll where Gender ='F' group by Gender
 select count(Name) from employee_payroll where Gender ='M' group by Gender
 select count(Name) from employee_payroll where Gender ='F' group by Gender
 
+select Name,Gender ,Salary from employee_payroll where Salary =(select max(salary)As maxsalary from employee_payroll where gender ='M')
+select Name,Gender ,Salary from employee_payroll where Salary In(select max(salary)As maxsalary from employee_payroll where gender ='M')
+
+--Display
+Select * From employee_payroll
+-------------------------------------------------------------------------------------------------------
+
+--Uc8 Extent table add Employee phone number, address,and depertment and add data
+ALTER TABLE employee_payroll ADD AddressOfEmp VARCHAR(50);
+ALTER TABLE employee_payroll ADD PhoneNumber VARCHAR(10);
+ALTER TABLE employee_payroll ADD Depertment VARCHAR(10) NOT NULL Default 'HR';
+
+INSERT INTO employee_payroll(Name,Salary,Start,Gender,AddressOfEmp,PhoneNumber,Depertment)VALUES('Rahul',1200000.00,'2021-01-01','M','Plot 23','1234567890','HR'),
+('Sonali',200000.00,'2021-05-01','F','Plot 3','1237567890','Mechanical');
+UPDATE employee_payroll SET Depertment='Manager' WHERE Name = 'Snehal';
+UPDATE employee_payroll SET  Depertment ='Software' WHERE Name = 'Mayur' or Name = 'Vaibhav';
+UPDATE employee_payroll set AddressOfEmp ='plot no12',PhoneNumber = '43534545' where Name='Snehal';
+--Display
+Select * From employee_payroll
