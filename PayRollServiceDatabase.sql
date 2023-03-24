@@ -78,4 +78,11 @@ UPDATE employee_payroll SET  Deductions = 0 WHERE Name = 'Mayur' or Name = 'Vaib
 UPDATE employee_payroll SET  Taxable_pay = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
 UPDATE employee_payroll SET  IncomE_tax = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
 UPDATE employee_payroll SET   Net_pay = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
+--Display
+Select * From employee_payroll
 
+--Uc10 Terissa Sale and Marketing Deperment 
+INSERT INTO employee_payroll(Name,Basic_Pay,Start,Gender,AddressOfEmp,PhoneNumber,Depertment, Deductions,Taxable_pay,IncomE_tax, Net_pay)VALUES('Terisa',2200000.00,'2021-01-21','F','Plot 23','1234567890','Sale',10000,10000,0,200000);
+INSERT INTO employee_payroll(Name,Basic_Pay,Start,Gender,AddressOfEmp,PhoneNumber,Depertment, Deductions,Taxable_pay,IncomE_tax, Net_pay)VALUES('Terisa',2200000.00,'2021-01-21','F','Plot 23','1234567890','Marketing',10000,10000,0,200000);
+--Display
+Select * From employee_payroll
