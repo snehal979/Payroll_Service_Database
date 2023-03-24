@@ -66,3 +66,16 @@ UPDATE employee_payroll SET  Depertment ='Software' WHERE Name = 'Mayur' or Name
 UPDATE employee_payroll set AddressOfEmp ='plot no12',PhoneNumber = '43534545' where Name='Snehal';
 --Display
 Select * From employee_payroll
+
+--Uc9 Extend table to have basic pay, Deduction,Taxable pay,Income tax,Net pay
+--ALTER TABLE employee_payroll CHANGE COLUMN Salary TO Basic_Pay;(USE IN MYSQL)
+SP_RENAME 'employee_payroll.Salary' ,'Basic_Pay','COLUMN';
+ALTER TABLE employee_payroll ADD Deductions BIGINT;
+ALTER TABLE employee_payroll ADD Taxable_pay BIGINT;
+ALTER TABLE employee_payroll ADD IncomE_tax BIGINT ;
+ALTER TABLE employee_payroll ADD Net_pay BIGINT ;
+UPDATE employee_payroll SET  Deductions = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
+UPDATE employee_payroll SET  Taxable_pay = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
+UPDATE employee_payroll SET  IncomE_tax = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
+UPDATE employee_payroll SET   Net_pay = 0 WHERE Name = 'Mayur' or Name = 'Vaibhav' or Name ='Sonali' or Name = 'Rahul'or Name = 'Snehal';
+
