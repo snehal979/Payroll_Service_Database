@@ -86,3 +86,83 @@ INSERT INTO employee_payroll(Name,Basic_Pay,Start,Gender,AddressOfEmp,PhoneNumbe
 INSERT INTO employee_payroll(Name,Basic_Pay,Start,Gender,AddressOfEmp,PhoneNumber,Depertment, Deductions,Taxable_pay,IncomE_tax, Net_pay)VALUES('Terisa',2200000.00,'2021-01-21','F','Plot 23','1234567890','Marketing',10000,10000,0,200000);
 --Display
 Select * From employee_payroll
+
+-----Delect The Table----------------
+drop Table employee_payroll
+
+
+
+------------ER DAIGRAM--------------------
+
+--UC 11 Create many the corresponding tables with attributes ,Entity,And relationship(join)
+/*Key attribute – Uniquely Identified the Entity e.g. employee id
+• Composite attribute – is a combination of other attributes e.g. employee address
+• Multivalued attribute – hold multiple values like the phone number
+• Derived attribute – value is dynamic and derived from another attribute e.g. net pay
+COMPANY a.EMPLOYEE DEAILS(personal information) b.DEPERTAMENT DETAILS(id,depertmentid,section) c.SATARY DETAILS(basic pay, Deduction,Taxable pay,Income tax,Net pay)
+*/
+--1.Employee Table,
+-- 2.Company Table, 
+--3.Salary Table, 
+--4.Department Table 
+
+--1.EMPLOYEE TABLE
+CREATE TABLE EmployeeDetail(
+EmpId INT PRIMARY KEY IDENTITY(1,1),
+EmpName VARCHAR(150) NOT NULL,
+Address VARCHAR(100)NOT NULL,
+Gender VARCHAR(10) NOT NULL,
+Mobile VARCHAR(10) DEFAULT('1234567890')
+);
+------------Data insert----------------
+INSERT INTO EmployeeDetail(EmpName,Address,Gender,Mobile)VALUES('Snehal','plotNo9','Female','9593573967');
+INSERT INTO EmployeeDetail(EmpName,Address,Gender,Mobile)VALUES('Mayur','plotNo93','Male','9593573968');
+INSERT INTO EmployeeDetail(EmpName,Address,Gender,Mobile)VALUES('Raju','plotNo6','Male','9593553967');
+INSERT INTO EmployeeDetail(EmpName,Address,Gender,Mobile)VALUES('Lata','plotNo3','Female','8593573967');
+INSERT INTO EmployeeDetail(EmpName,Address,Gender,Mobile)VALUES('Vaibhav','plotNo1','Male','7593573967');
+---Display---
+SELECT *FROM EmployeeDetail;
+
+--Deperatment TABLE
+CREATE TABLE DepertamentDetail(
+DeptId INT PRIMARY KEY IDENTITY(10001,1),
+DeptName VARCHAR(150) NOT NULL,
+EmpId INT FOREIGN KEY REFERENCES EmployeeDetail(EmpId)
+);
+------------Data insert----------------
+INSERT INTO DepertamentDetail VALUES('Manager', 1),('HR', 2),('Sale', 3),('Marketing', 4),('software',5);
+
+-- Salary Table
+CREATE TABLE Salary(
+BasicPay BIGINT DEFAULT(000),
+Deduction BIGINT DEFAULT(000),
+Tax BIGINT DEFAULT(000),
+EmpId INT FOREIGN KEY REFERENCES EmployeeDetail(EmpId),
+NetPay Bigint 
+);
+INSERT INTO Salary (BasicPay,Deduction,Tax,EmpId) VALUES(10000000,2000,34333,1);
+INSERT INTO Salary(BasicPay,Deduction,Tax,EmpId) VALUES(20000000,5000,3435,2);
+
+INSERT INTO Salary(BasicPay,Deduction,Tax,EmpId) VALUES(1000000,4000,31333,3);
+
+INSERT INTO Salary(BasicPay,Deduction,Tax,EmpId) VALUES(10000000,2000,34333,4);
+UPDATE Salary SET NetPay = (BasicPay-Tax-Deduction);
+SELECT *FROM Salary;
+--MAIN COMPANY TABLE
+CREATE TABLE CompanyTable(
+CompId INT PRIMARY KEY IDENTITY(1,1),
+EmpId INT FOREIGN KEY REFERENCES EmployeeDetail(EmpId),
+DeptId INT FOREIGN KEY REFERENCES DepertamentDetail(DeptId),
+Start DATE NOT NULL,
+);
+INSERT INTO CompanyTable VALUES(1,10001,'2020-03-01'),(2,10002,'2011-01-01'),(3,10003,'2015-01-01'),(4,10004,'2011-01-01'),(5,10005,'2018-01-01');
+SELECT *FROM CompanyTable;
+--DROP TABLE CompanyTable; --Delect table
+--Join
+SELECT * FROM CompanyTable AS A 
+FULL OUTER JOIN EmployeeDetail AS B ON A.EmpId=B.EmpId; 
+SELECT * FROM EmployeeDetail AS C
+FULL OUTER JOIN DepertamentDetail AS D ON C.EmpId=D.EmpId; 
+
+SELECT * FROM EmployeeDetail AS C
+FULL OUTER JOIN Salary AS D ON C.EmpId=D.EmpId; 
