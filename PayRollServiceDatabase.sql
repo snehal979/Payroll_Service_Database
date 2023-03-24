@@ -166,3 +166,43 @@ FULL OUTER JOIN DepertamentDetail AS D ON C.EmpId=D.EmpId;
 
 SELECT * FROM EmployeeDetail AS C
 FULL OUTER JOIN Salary AS D ON C.EmpId=D.EmpId; 
+
+--Uc12 
+--Uc12//Uc5
+--All DATA RETRIVE
+SELECT * FROM CompanyTable
+INNER JOIN EmployeeDetail ON CompanyTable.EmpId = EmployeeDetail.EmpId
+INNER JOIN DepertamentDetail ON EmployeeDetail.EmpId = DepertamentDetail.EmpId
+INNER JOIN Salary ON EmployeeDetail.EmpId = Salary.EmpId
+
+--per person DATA RETRIVE
+SELECT * FROM CompanyTable
+INNER JOIN EmployeeDetail ON CompanyTable.EmpId = EmployeeDetail.EmpId and EmployeeDetail.EmpName='Snehal'
+INNER JOIN DepertamentDetail ON EmployeeDetail.EmpId = DepertamentDetail.EmpId
+INNER JOIN Salary ON EmployeeDetail.EmpId = Salary.EmpId
+
+--UC12//UC6
+SELECT * FROM CompanyTable
+WHERE Start BETWEEN CAST('2018-01-01'AS DATE) AND GETDATE();
+
+--UC12//UC7 
+
+--uc7Avg
+SELECT AVG(NetPay) FROM Salary 
+INNER JOIN EmployeeDetail ON  Salary.EmpId = EmployeeDetail.EmpId  WHERE Gender = 'Male' GROUP BY Gender
+
+--uc7 sum
+SELECT Gender, SUM(NetPay) AS AvgSalary FROM Salary 
+INNER JOIN EmployeeDetail ON  Salary.EmpId = EmployeeDetail.EmpId GROUP BY Gender;
+
+--uc7 min
+SELECT Gender, min(NetPay) AS MinSalary FROM Salary 
+INNER JOIN EmployeeDetail ON  Salary.EmpId = EmployeeDetail.EmpId GROUP BY Gender;
+
+--uc7 max
+SELECT Gender, max(NetPay) AS MaxSalary FROM Salary 
+INNER JOIN EmployeeDetail ON  Salary.EmpId = EmployeeDetail.EmpId GROUP BY Gender;
+
+--uc7 count
+SELECT Gender, COUNT(NetPay) As TotalPerson FROM Salary 
+INNER JOIN EmployeeDetail ON  Salary.EmpId = EmployeeDetail.EmpId GROUP BY Gender;
